@@ -30,6 +30,15 @@ SELECT DISTINCT Building_name, Role FROM Buildings Left JOIN Employees On Buildi
 SELECT Building_Name FROM Buildings Left JOIN Employees On Buildings.Building_name = Employees.Building WHERE Building IS NULL;
 SELECT title, ((international_sales + domestic_sales)/1000000) AS combSales FROM Movies LEFT JOIN Boxoffice ON Movies.id = Boxoffice.movie_id;
 SELECT title, rating * 10 AS divRates FROM Movies LEFT JOIN Boxoffice ON Movies.id = Boxoffice.movie_id;
+SELECT title, (year % 2 = 0) FROM movies WHERE (year % 2 = 0)
+SELECT * FROM nobel WHERE subject = "Physics" AND yr = 1980 OR subject = "Chemistry" AND yr = 1984
+SELECT yr, subject, winner FROM nobel WHERE subject = 'Medicine'  AND yr < 1910 OR   subject = 'Literature' AND yr >= 2004
+SELECT * FROM nobel WHERE winner = "EUGENE O'NEILL"
+SELECT winner, subject FROM nobel WHERE yr=1984 ORDER BY subject IN ('Physics','Chemistry'), subject, winner
+
+
+
+
 
 
 
