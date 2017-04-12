@@ -71,18 +71,46 @@ IN ('Theodore Roosevelt', 'Woodrow Wilson', 'Jimmy Carter', 'Barack Obama')
 SELECT name, round(gdp / population, -3) FROM world WHERE gdp >1000000000000 
 -- 12
 SELECT name, capital FROM world WHERE  LEFT(capital, 1) = LEFT(name, 1)AND capital != name
--- 1
-SELECT name FROM world WHERE (gdp/population) > 38555.0739 AND continent = "Europe"
 -- 2
+SELECT name FROM world WHERE (gdp/population) > 38555.0739 AND continent = "Europe"
+-- 4
+
 SELECT name, population
 FROM world
 WHERE population >
     (SELECT population FROM world WHERE name = 'Canada')
 AND population <
     (SELECT population FROM world WHERE name = 'Poland')
+-- 6
 SELECT name
   FROM world
 WHERE gdp >= ALL(SELECT gdp FROM world WHERE gdp >=0 AND continent = 'Europe') AND continent != 'Europe'
+-- 8
+SELECT continent, name
+FROM world a
+WHERE name <= ALL(SELECT name FROM world b WHERE b.continent = a.continent)
+-- 10
+SELECT name, continent
+FROM world a
+WHERE population > ALL(SELECT population*3 FROM world b WHERE a.continent = b.continent AND population > 0 AND b.name != a.name)
+ -- SUM 2
+ SELECT DISTINCT continent FROM world
+ -- 4
+ SELECT count(name)
+FROM world
+WHERE area >= 1000000
+-- 6
+SELECT continent, COUNT(name) FROM world GROUP BY continent
+-- 8
+ SELECT DISTINCT continent
+FROM world a
+WHERE 100000000  <= (SELECT SUM(population) FROM world b WHERE a.continent = b.continent AND population >  0 )
+SELECT id,stadium,team1,team2 FROM game WHERE id = '1012'
+SELECT team1,team2, player FROM game JOIN goal ON (id=matchid) WHERE player LIKE 'Mario%'
+SELECT mdate, teamname FROM game JOIN eteam ON (team1=eteam.id) WHERE coach = 'Fernando Santos'
+SELECT DISTINCT stadium, COUNT(gtime) FROM game JOIN goal ON matchid = id GROUP BY stadium
+
+SELECT DISTINCT matchid, mdate, COUNT(teamid) AS count FROM game JOIN goal ON matchid = id WHERE teamid = 'GER' Group by matchid,mdate, teamid
 
 
 
