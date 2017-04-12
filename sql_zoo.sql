@@ -111,6 +111,39 @@ SELECT mdate, teamname FROM game JOIN eteam ON (team1=eteam.id) WHERE coach = 'F
 SELECT DISTINCT stadium, COUNT(gtime) FROM game JOIN goal ON matchid = id GROUP BY stadium
 
 SELECT DISTINCT matchid, mdate, COUNT(teamid) AS count FROM game JOIN goal ON matchid = id WHERE teamid = 'GER' Group by matchid,mdate, teamid
+-- MOre Join 1
+SELECT id, title
+ FROM movie
+ WHERE yr=1962
+ -- 2
+ SELECT yr
+ FROM movie
+ WHERE title = 'Citizen Kane'
+ -- 4
+ SELECT id
+FROM actor
+WHERE name = "Glenn Close"
+-- 5
+SELECT id
+FROM movie
+WHERE title = 'Casablanca'
+-- 6
+SELECT ti.name
+FROM actor AS ti
+Join casting AS cl
+ON ti.id = actorid
+Join movie AS t
+ON t.id=movieid
+WHERE movieid=11768
+-- 8
+SELECT t.title
+FROM actor AS ti
+Join casting AS cl
+ON ti.id = actorid
+Join movie AS t
+ON t.id=movieid
+WHERE actorid = '2216'
+-- 10
 
 
 
